@@ -1,0 +1,6 @@
+<?php
+return [
+    'LIST_LIMIT_NUMBER_OF_ROOM' => "10",
+    'LIST_LIMIT_NUMBER_OF_COMMENT' => "50",
+    'LIST_LIMIT_NUMBER_OF_CATEGORY' => "50"
+];

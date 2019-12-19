@@ -15,7 +15,8 @@
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "~1.0",
         "phpunit/phpunit": "~6.0",
-        "symfony/thanks": "^1.0"
+        "symfony/thanks": "^1.0",
+        "predis/predis": "~1.1"
     },
     "autoload": {
         "classmap": [
@@ -23,8 +24,15 @@
             "database/factories"
         ],
         "psr-4": {
-            "App\\": "app/"
-        }
+            "App\\": "app/",
+            "MyCommon\\": "app/MyCommon"
+        },
+        "files": [
+            "app/MyCommon/Helpers/common_helper.php",
+            "app/MyCommon/Helpers/file_helper.php",
+            "app/MyCommon/Helpers/text_converter_helper.php"
+        ]
+
     },
     "autoload-dev": {
         "psr-4": {
