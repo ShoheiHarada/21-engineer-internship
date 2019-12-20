@@ -34,6 +34,46 @@ End_of_sql;
     //カテゴリーIDのリストを取得
     public function getCategoryList()
     {
+        $where = [];
+        //もしカテゴリ検索をけけていたら
+        if (isset($_GET['category_search'])) {
+            //全角空白を半角空白に変換
+            $search = preg_replace("|　|"," ",$_GET['category_search']);
+            //検索ワードを半角カナ→全角カナ、全角英数字→半角英数字に変換
+            $search_word = mb_convert_kana($search,"KVnr","UTF-8");
+            //半角空白で区切ってそれぞれを配列に
+            $search_words = explode(" ",$search_word);
+            //すべての検索ワードに関して条件節を作成
+            foreach ($search_words as $word) {
+                $word = likeEscape($word);
+                $where[] = ['category_name', 'LIKE', "%{$word}%"];
+            }
+        }
+
+        //ページネーションにはLaravelのクエリビルダが便利なので使用
+        //参考：https://readouble.com/laravel/5.5/ja/queries.html
+        $result = \DB::table(self::TABLE)
+            ->select(
+                'category_id',
+                'category_name',
+                'room_count'
+            )
+            ->where('delete_flag', 0)
+            ->where($where)
+            ->orderBy('room_count', 'desc')
+            ->paginate(20);
+
+        //キー名を変更
+        $result = stdClassToArray($result);
+        $result['category_list'] = $result['data'];
+        unset($result['data']);
+
+        return $result;
+    }
+
+    //カテゴリーIDのリストを取得(サジェスト用)
+    public function getCategoryListForSuggest()
+    {
         //実行したいSQL文を作成
         $sql = <<< End_of_sql
 SELECT
@@ -49,6 +89,7 @@ End_of_sql;
 
         return $result;
     }
+
 
     //新しいカテゴリを作成
     public function createNewCategory($param)

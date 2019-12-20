@@ -13,10 +13,13 @@
 	</head>
 
 	{{--body--}}
-	<body class="bg-light">
+	<body class="bg-light bg">
 
 		{{--headerのファイルを読み込み--}}
 		@include('_common.header')
+
+		{{--headerのファイルを読み込み--}}
+		@include('_common.tab_menu')
 
 		{{--section('jumbotron')が入る--}}
 		@yield('jumbotron')
@@ -52,7 +55,7 @@
 							<span aria-hidden="true">×</span>
 						</button>
 					</div>
-					<div class="modal-body">
+					<div class="modal-body bg">
 						<p class="mb-2 text-secondary font-weight-bold">ログアウトします。よろしいですか？</p>
 						<form action="top.html">
 							<div class="d-flex justify-content-end">

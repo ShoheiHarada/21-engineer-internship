@@ -1,9 +1,12 @@
 <?php
 
-namespace App\Http;
+//このファイルの場所
+namespace  App\Http;
 
+//使うファイルのディレクトリ
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
+//このファイルのクラス名と役割
 class Kernel extends HttpKernel
 {
     /**
@@ -57,5 +60,9 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+
+        // user: ログインチェック
+        'user.authed' => \App\Http\Middleware\UserAuthed::class,
+        'user.unauthed' => \App\Http\Middleware\UserUnAuthed::class,
     ];
 }
