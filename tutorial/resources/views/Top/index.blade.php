@@ -19,7 +19,6 @@
 @endif
 
 @section('contents')
-@include('_common.tab_menu')
 <div class="row">
     <div class="col-md-8">
         <div>

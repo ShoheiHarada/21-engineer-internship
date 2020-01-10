@@ -36,6 +36,8 @@ class ViewComposer
             $data['user_info']['posted_comment'] = $this->_common->getPostedComment($user_id);
             //参加したルーム数
             $data['user_info']['joined_room'] = $this->_common->getJoinedRoom($user_id);
+            //プロフィール画像の有無
+            $data['user_info']['img_exists'] = file_exists("storage/user_image/user_{$user_id}.jpg");
         }
         //コメント数ランキング
         $data['comment_ranking'] = $this->_common->getRanking();

@@ -89,7 +89,7 @@ class IndexService
         //ユーザーIDを取得
         $param['user_id'] = \Auth::guard('user')->Id();
 
-        DB::beginTransaction();
+        \DB::beginTransaction();
         try {
 
             //同名のカテゴリが存在していたらIDを取得
@@ -120,7 +120,7 @@ class IndexService
     {
         //ユーザーIDを取得
         $param['user_id'] = \Auth::guard('user')->Id();
-        DB::beginTransaction();
+        \DB::beginTransaction();
         try {
 
             //同名のカテゴリが存在していたらIDを取得

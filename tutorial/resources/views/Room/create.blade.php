@@ -1,7 +1,6 @@
 @extends('_common.base_layout')
 
 @section('contents')
-    @include('_common.tab_menu')
     <div class="row">
         <div class="col-md-8">
             <div>
@@ -25,9 +24,11 @@
                 <div  class="d-block m-3">
                     <input type="text" class="w-100" name="category_name" maxlength="50" minlength="1" placeholder="カテゴリ名を記入" value="{{old('category_name')}}" list="category_list">
                     <datalist id="category_list">
-                        @foreach($category_list as $category)
-                            <option value="{{$category['category_name']}}"></option>
-                        @endforeach
+                        @if(!empty($category_))
+                            @foreach($category_list as $category)
+                                <option value="{{$category['category_name']}}"></option>
+                            @endforeach
+                        @endif
                     </datalist>
                 </div>
                 <h5 for="title">ルーム詳細</h5>

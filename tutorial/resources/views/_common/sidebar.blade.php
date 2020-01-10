@@ -3,8 +3,15 @@
 	@if(\Auth::guard('user')->check())
 		<div class="card mb-4">
 			<a href="/mypage" class="text-dark text-decoration-none w-100 h-100">
-				<div class="card-header">
-					<h5 class="font-weight-bold"><i class="fa fa-fw fa-user"></i>{{$user_info['name']}}</h5>
+				<div class="card-header p-1">
+					<h5 class="font-weight-bold m-0">
+						@if($user_info['img_exists'])
+							<img class="rounded-circle" src="/storage/user_image/user_{{\Auth::guard('user')->Id()}}.jpg" alt="プロフィール画像" width="30px" height="30px">
+						@else
+							<img class="rounded-circle" src="/storage/user_image/noImage.png" alt="プロフィール画像" width="30px" height="30px">
+						@endif
+						{{$user_info['name']}}
+					</h5>
 				</div>
 				<div class="card-body">
 					<div class="row">

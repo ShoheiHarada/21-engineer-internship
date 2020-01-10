@@ -13,7 +13,7 @@
 	</head>
 
 	{{--body--}}
-	<body class="bg-light bg">
+	<body class="bg-light">
 
 		{{--headerのファイルを読み込み--}}
 		@include('_common.header')
