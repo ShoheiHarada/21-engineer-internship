@@ -34,7 +34,7 @@ class IndexController extends Controller
 	public function create(IndexService $service)
 	{
 	    //カテゴリの候補を取得
-        $data['category_list'] = $service->getCategoryList();
+		$data['category_list'] = $service->getCategoryList();
 
         return view('Room.create')->with($data);
 	}

@@ -34,7 +34,7 @@ class ActionRequest extends FormRequest
         return [
             'title'=> 'required|min:5|max:100',
             'category_name'=> 'required|max:50',
-            'body'=>'required|max:500'
+            'body'=>'required|max:5000'
         ];
     }
 

@@ -21,7 +21,7 @@ class CommentController extends Controller
         $service->postNewComment($param);
 
         //元の画面にリダイレクト
-        return redirect("/room?room_id={$param['room_id']}")->with('success', 'コメントを投稿しました');
+        return redirect("/room?room_id={$param['room_id']}#comment")->with('success', 'コメントを投稿しました');
     }
 
     public function actionEdit(CommentRequest $request, CommentService $service)

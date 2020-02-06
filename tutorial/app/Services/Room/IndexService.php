@@ -78,7 +78,7 @@ class IndexService
     public function getCategoryList()
     {
         //カテゴリの候補リストを取得
-        $category_list = $this->_category->getCategoryList();
+        $category_list = $this->_category->getCategoryListForSuggest();
 
         return $category_list;
     }

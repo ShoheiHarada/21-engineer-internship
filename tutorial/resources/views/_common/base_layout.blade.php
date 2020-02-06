@@ -18,7 +18,7 @@
 		{{--headerのファイルを読み込み--}}
 		@include('_common.header')
 
-		{{--headerのファイルを読み込み--}}
+		{{--tab_menuのファイルを読み込み--}}
 		@include('_common.tab_menu')
 
 		{{--section('jumbotron')が入る--}}

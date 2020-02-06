@@ -18,7 +18,7 @@
                     @endif
                 </h2>
                 <p>作成日:{{ date('Y年m月d日 H:i:s', strtotime($room_data['created_date'])) }}　作成者 : {{ $room_data['creator_unsub']? '[退会したユーザー]' : $room_data['creator']}}</p>
-                <p class="lead m-3">{{ $room_data['body'] }}</p>
+                <p class="lead m-3">{!!nl2br($room_data['body'])!!}</p>
             </div>
             <hr>
             <div>
@@ -27,8 +27,10 @@
                     @foreach($comment_list as $comment)
                         <div class="card mb-1">
                             <div class="card-body align-items-start">
-                                @if($comment['destination_name'])
+                                @if($comment['destination_name'] && !$comment['destination_unsub'])
                                     <div class="mt-n3 text-muted">{{ $comment['destination_name'] }}への返信<i class="fa fa-fw fa-reply"></i></div>
+                                @elseif($comment['destination_unsub'] == 1)
+                                    <div class="mt-n3 text-muted">[退会したユーザー]への返信<i class="fa fa-fw fa-reply"></i></div>
                                 @endif
                                 @if($comment['user_unsub'])
                                     <span class="mb-2 text-muted font-weight-bold small">[退会したユーザー]</span>
@@ -126,7 +128,7 @@
                                         </div>
                                     @endif
                                 </span>
-                                <p class="card-text mb-auto font-weight-bold">{{ $comment['comment_body'] }}</p>
+                                <p class="card-text mb-auto font-weight-bold">{!!nl2br($comment['comment_body'])!!}</p>
                             </div>
                         </div>
                     @endforeach

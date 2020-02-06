@@ -35,6 +35,7 @@ SELECT
     user.name as user_name,
     user.delete_flag as user_unsub,
     destination.name as destination_name,
+    destination.delete_flag as destination_unsub,
     comment_body,
     comment_text1,
     comment_text2,

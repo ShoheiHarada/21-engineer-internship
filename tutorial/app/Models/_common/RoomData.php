@@ -25,9 +25,9 @@ class RoomData
             foreach ($search_words as $word) {
                 $word = likeEscape($word);
                 //ルーム名に対する条件
-                $where[] = ['title', 'LIKE', "%{$word}%"];
+                $where[] = ['title', 'collate utf8mb4_unicode_ci LIKE', "%{$word}%"];
                 //ルーム詳細に対する条件
-                $or_where[] = ['body', 'LIKE', "%{$word}%"];
+                $or_where[] = ['body', 'collate utf8mb4_unicode_ci LIKE', "%{$word}%"];
             }
 
         }
@@ -42,7 +42,7 @@ class RoomData
                         ->orWhere($or_where);
             })
             ->orderBy('created_date', 'desc')
-            ->paginate(30);
+            ->paginate(10);
 
         return stdClassToArray($result);
     }
@@ -57,7 +57,7 @@ class RoomData
             ->where('delete_flag',0)
             ->where('category_id',$category_id)
             ->orderBy('created_date', 'desc')
-            ->paginate(30);
+            ->paginate(10);
 
         return stdClassToArray($result);
     }
