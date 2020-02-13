@@ -14,9 +14,9 @@ class RoomData
         $where = [];
         $or_where = [];
         //ワード検索がかかっていた場合に設定
-        if (isset($_GET['search'])) {
+        if (isset($param['search'])) {
             //全角空白を半角空白に変換
-            $search = preg_replace("|　|"," ",$_GET['search']);
+            $search = preg_replace("|　|"," ",$param['search']);
             //検索ワードを半角カナ→全角カナ、全角英数字→半角英数字に変換
             $search_word = mb_convert_kana($search,"KVnr","UTF-8");
             //半角空白で区切ってそれぞれを配列に
@@ -25,9 +25,9 @@ class RoomData
             foreach ($search_words as $word) {
                 $word = likeEscape($word);
                 //ルーム名に対する条件
-                $where[] = ['title', 'collate utf8mb4_unicode_ci LIKE', "%{$word}%"];
+                $where[] = ['title', 'LIKE', "%{$word}%"];
                 //ルーム詳細に対する条件
-                $or_where[] = ['body', 'collate utf8mb4_unicode_ci LIKE', "%{$word}%"];
+                $or_where[] = ['body', 'LIKE', "%{$word}%"];
             }
 
         }

@@ -12,18 +12,31 @@
         $start = $current_page - 2;
         $end = $current_page + 2;
     }
-    if (!isset($search_param)) {
+    //検索ワードを引き継ぎ
+    if (isset($search)) {
+        $search_param = "&search={$search}";
+    }elseif (isset($category_search)) {
+        $search_param = "&category_search={$category_search}";
+    }else{
         $search_param = '';
+    }
+    //IDを引き継ぎ
+    if (isset($room_id)) {
+        $id_param = "&room_id={$room_id}";
+    }elseif (isset($category_id)) {
+        $id_param = "&category_id={$category_id}";
+    }else{
+        $id_param = '';
     }
 @endphp
 <div class="my-3" id="paginate">
     <div class="text-center">
         <div class="btn-group btn-group-sm" role="group">
             @if($current_page > 1)
-                <a class="btn btn-sm text-primary" href="{{ $first_page_url.$search_param.'#paginate' }}">
+                <a class="btn btn-sm text-primary" href="{{ $first_page_url.$id_param.$search_param.'#paginate' }}">
                         {{'<<'}}
                 </a>
-                <a class="btn btn-sm text-primary" href="{{ $prev_page_url.$search_param.'#paginate' }}">
+                <a class="btn btn-sm text-primary" href="{{ $prev_page_url.$id_param.$search_param.'#paginate' }}">
                         {{'<'}}
                 </a>
             @endif
@@ -33,7 +46,7 @@
                 @endif
             </span>
             @for($i = $start ; $i <= $end && $i <= $last_page; $i++)
-                <a class="btn btn-sm text-primary {{ $i == $current_page ? 'font-weight-bold' : '' }}" href="{{ $path.'?page='.$i.$search_param.'#paginate' }}">
+                <a class="btn btn-sm text-primary {{ $i == $current_page ? 'font-weight-bold' : '' }}" href="{{ $path.'?page='.$i.$id_param.$search_param.'#paginate' }}">
                         {{ $i }}
                 </a>
             @endfor
@@ -43,10 +56,10 @@
                 @endif
             </span>
             @if($current_page < $last_page)
-                <a class="btn btn-sm text-primary" href="{{ $next_page_url.$search_param.'#paginate' }}">
+                <a class="btn btn-sm text-primary" href="{{ $next_page_url.$id_param.$search_param.'#paginate' }}">
                         {{'>'}}
                 </a>
-                <a class="btn btn-sm text-primary" href="{{ $last_page_url.$search_param.'#paginate' }}">
+                <a class="btn btn-sm text-primary" href="{{ $last_page_url.$id_param.$search_param.'#paginate' }}">
                         {{'>>'}}
                 </a>
             @endif

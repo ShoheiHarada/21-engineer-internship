@@ -32,13 +32,13 @@ End_of_sql;
     }
 
     //カテゴリーIDのリストを取得
-    public function getCategoryList()
+    public function getCategoryList($param)
     {
         $where = [];
         //もしカテゴリ検索をけけていたら
-        if (isset($_GET['category_search'])) {
+        if (isset($param['category_search'])) {
             //全角空白を半角空白に変換
-            $search = preg_replace("|　|"," ",$_GET['category_search']);
+            $search = preg_replace("|　|"," ",$param['category_search']);
             //検索ワードを半角カナ→全角カナ、全角英数字→半角英数字に変換
             $search_word = mb_convert_kana($search,"KVnr","UTF-8");
             //半角空白で区切ってそれぞれを配列に

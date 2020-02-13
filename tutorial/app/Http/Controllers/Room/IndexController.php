@@ -26,6 +26,8 @@ class IndexController extends Controller
         //serviceのgetCommentList()を起動
         $data += $service->getCommentList($param);
 
+        $data['room_id'] = $param['room_id'];
+
         //取得したデータを使ってビューを表示
         return view('Room.index')->with($data);
 	}

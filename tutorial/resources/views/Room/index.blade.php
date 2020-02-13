@@ -73,8 +73,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    @endif
-                                    @if($comment['can_edit'])
+                                    @elseif($comment['can_edit'])
                                         <a href="#" class="fa fa-fw fa-pen text-primary text-decoration-none" data-toggle="modal" data-target="#editModal{{$comment['comment_id']}}"></a>
                                         <a href="#" class="fa fa-fw fa-trash text-muted text-decoration-none" data-toggle="modal" data-target="#deleteModal{{$comment['comment_id']}}"></a>
                                         <!--編集用モーダル-->
@@ -88,7 +87,7 @@
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <a href="#" class="mb-2 text-success font-weight-bold">マイユーザー</a>
+                                                        <a href="#" class="mb-2 text-success font-weight-bold">{{ $comment['user_name'] }}</a>
                                                         <form method="post" action="room/comment/edit">
                                                             {{ csrf_field() }}
                                                             <input type="hidden" name="comment_id" value="{{ $comment['comment_id'] }}">

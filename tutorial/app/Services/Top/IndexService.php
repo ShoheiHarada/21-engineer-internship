@@ -32,10 +32,9 @@ class IndexService
     {
         //ルームIDのリストを取得
         $result = $this->_room->getRoomIdList($param);
-        $result['search_param'] = '';
         //検索があればページング用のパラメータ設定
-        if (!empty($_GET['search'])) {
-            $result['search_param'] = "&search={$_GET['search']}";
+        if (!empty($param['search'])) {
+            $result['search'] = $param['search'];
         }
 
         //それぞれのルームの詳細を取得

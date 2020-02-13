@@ -32,14 +32,13 @@ class IndexService
     }
 
     //カテゴリ一覧を作成
-    public function getCategoryList()
+    public function getCategoryList($param)
     {
         //カテゴリIDのリストを取得
-        $data = $this->_category->getCategoryList();
-        //$_GET['category_search']がセットされていればページング用の文字列をセット
-        $data['search_param'] = '';
-        if (!empty($_GET['category_search'])) {
-            $data['search_param'] = "&category_search={$_GET['category_search']}";
+        $data = $this->_category->getCategoryList($param);
+        //$param['category_search']がセットされていればページング用の文字列をセット
+        if (!empty($param['category_search'])) {
+            $data['category_search'] = $param['category_search'];
         }
 
         return $data;

@@ -7,7 +7,7 @@ namespace  App\Http\Requests\Category;
 use Illuminate\Foundation\Http\FormRequest;
 
 //このファイルのクラス名と役割
-class IndexRequest extends FormRequest
+class DetailRequest extends FormRequest
 {
     protected $_inputs = [];
 
@@ -33,7 +33,7 @@ class IndexRequest extends FormRequest
     {
         return [
             //category_idは必須かつデータベースに存在するか
-            'category_search'=> 'filled',
+            'category_id'=> 'required|exists:category',
         ];
     }
 
@@ -41,7 +41,7 @@ class IndexRequest extends FormRequest
     public function attributes()
     {
         return [
-            'category_search'=> '検索ワード',
+            'category_id'=> 'カテゴリID',
         ];
     }
 
@@ -49,7 +49,8 @@ class IndexRequest extends FormRequest
     public function messages()
     {
         return [
-            'category_search.filled'=> '検索ワードを入力してください',
+            'category_id.required'=> 'カテゴリIDを入力してください',
+            'category_id.exists'=> 'カテゴリが存在しません',
         ];
     }
 }

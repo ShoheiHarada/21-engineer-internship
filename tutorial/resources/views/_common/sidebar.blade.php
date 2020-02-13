@@ -17,14 +17,22 @@
 					<div class="row">
 						<div class="col-4 px-1">
 							<h6 class="text-center small">ルーム作成数</h6>
-							<h3 class="text-center">{{ $user_info['created_room'] }}</h3>
 						</div>
 						<div class="col-4 px-1">
 							<h6 class="text-center small">コメント数</h6>
-							<h3 class="text-center">{{ $user_info['posted_comment'] }}</h3>
 						</div>
 						<div class="col-4 px-1">
 							<h6 class="text-center small">参加したルーム数</h6>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-4 px-1">
+							<h3 class="text-center">{{ $user_info['created_room'] }}</h3>
+						</div>
+						<div class="col-4 px-1">
+							<h3 class="text-center">{{ $user_info['posted_comment'] }}</h3>
+						</div>
+						<div class="col-4 px-1">
 							<h3 class="text-center">{{ $user_info['joined_room'] }}</h3>
 						</div>
 					</div>
@@ -47,7 +55,7 @@
 	<div class="p-3">
 		<form method="get" action="/">
 			<div class="input-group w-100">
-				<input type="search" class="rounded w-75" name="search" value="@if(isset($_GET['search'])) {{$_GET['search']}} @endif" placeholder="検索">
+				<input type="search" class="rounded w-75" name="search" value="@if(isset($search)){{$search}}@endif" placeholder="検索">
 				<button type="submit" class="btn btn-primary px-4 w-25"><i class="fa fa-fw fa-search"></i></button>
 			</div>
 		</form>

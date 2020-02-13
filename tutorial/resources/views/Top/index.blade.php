@@ -22,8 +22,8 @@
 <div class="row">
     <div class="col-md-8">
         <div>
-            @if (isset($_GET['search']))
-                <h2>「{{$_GET['search']}}」の検索結果</h2>
+            @if (isset($search))
+                <h2>「{{$search}}」の検索結果</h2>
             @else
                 <h2>新着ルーム</h2>
             @endif

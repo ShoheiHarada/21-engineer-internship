@@ -18,10 +18,8 @@ class IndexRequest extends FormRequest
             return $this->_inputs;
         }
 
-        $inputs = parent::all();
+        $this->_inputs = parent::all();
 
-        // Format
-        $this->_inputs = $this->_format($inputs);
         return $this->_inputs;
     }
 
@@ -32,17 +30,23 @@ class IndexRequest extends FormRequest
 
 	public function rules()
 	{
-		return [];
+		return [
+		    'search' => 'filled'
+        ];
 	}
 
 	public function attributes()
 	{
-		return [];
+		return [
+            'search' => '検索ワード'
+        ];
 	}
 
 	public function messages()
 	{
-		return [];
+		return [
+            'search.filled' => '検索ワードを入力してください'
+        ];
 	}
 
 	// ----------------------------------------------------

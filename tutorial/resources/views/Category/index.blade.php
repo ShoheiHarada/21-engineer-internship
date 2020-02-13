@@ -4,15 +4,15 @@
     <div class="row">
         <div class="col-md-8">
             <div>
-                @if (isset($_GET['category_search']))
-                    <h2>「{{$_GET['category_search']}}」のカテゴリ検索結果</h2>
+                @if (isset($category_search))
+                    <h2>「{{$category_search}}」のカテゴリ検索結果</h2>
                 @else
                     <h2>カテゴリ一覧</h2>
                 @endif
                 <div class="p-3">
                     <form method="get" action="/category">
                         <div class="input-group justify-content-end">
-                            <input type="search" class="rounded" name="category_search" value="{{isset($_GET['category_search']) ? $_GET['category_search'] : ''}}" placeholder="カテゴリ名で検索">
+                            <input type="search" class="rounded" name="category_search" value="{{isset($category_search) ? $category_search : ''}}" placeholder="カテゴリ名で検索">
                             <button type="submit" class="btn btn-success px-4"><i class="fa fa-fw fa-search"></i></button>
                         </div>
                     </form>
