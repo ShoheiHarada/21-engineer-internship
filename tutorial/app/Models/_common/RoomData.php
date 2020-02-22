@@ -206,6 +206,7 @@ End_of_sql;
 
     //ルームの削除フラグを立てる
     public function deleteRoom($param)
+
     {
         //現在時刻
         $now = nowDateTime();
@@ -234,4 +235,38 @@ End_of_sql;
 
         return $result;
     }
+ //メソッドを追加
+ public function getAllRoomId($search = '')
+ {
+     //内容
+
+
+     //実行したいSQL文を作成
+     $sql = <<< End_of_sql
+     SELECT
+         room.room_id
+     FROM
+         room
+     WHERE
+         room.delete_flag = :delete_flag
+     End_of_sql;
+
+     if (!empty($search)) {                                    //もし$searchが空じゃなければ
+        $sql .= " AND room.title LIKE '%{$search}%'";         //$sqlに条件を追加
+    }
+
+
+
+
+
+      //SQL内で使う変数を定義
+      $bind_params = [
+        'delete_flag' => 0,
+    ];
+
+    $result = stdClassToArray(\DB::select($sql, $bind_params));
+
+        return $result;
+ }
+
 }
