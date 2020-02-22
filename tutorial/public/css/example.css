@@ -1,0 +1,76 @@
+.ex-zindex-10{
+  z-index: 10;
+}
+.ex-zindex-5{
+  z-index: 5;
+}
+.ex-zindex-bg{
+  z-index: -10;
+}
+.ex-margin-top-10{
+  margin-top: 80px;
+}
+.ex-margin-left-right-100{
+  margin-left: 80px;
+  margin-right: 80px;
+}
+.ex-margin-right-100{
+  margin-right: 80px;
+}
+.ex-background-1{
+  background-image: url("/storage/background1.jpg");
+  background-color:rgba(255,255,255,0.8);
+  background-blend-mode:lighten;
+}
+.ex-background-color{
+  background: #fff5e5;
+}
+.ex-padding-0{
+  padding-left: 0;
+  padding-right: 0;
+}
+.ex-padding-right-100{
+  padding-right: 100;
+}
+.ex-padding-100{
+  padding-right: 100;
+  padding-left: 100;
+}
+.ex-opacity-1{
+  opacity: 1;
+}
+.ex-bg-img{
+  background-image: url("/storage/background1.jpg");
+}
+.ex-border-radius-10{
+  border-radius: 20px;
+}
+.ex-bg-gray{
+  background-color: gray;
+}
+.ex-bg-cream{
+  background-color: rgb(255, 201, 102);
+}
+.ex-footer-bottom{
+  width: 100%;
+  background-color: #89c7de;
+  color: #fff;
+  text-align: center;
+  padding: 30px 0;
+
+/* position: absolute;←絶対位置 */
+  bottom: 0; /*下に固定*/
+}
+.ex-wrapper{
+  min-height: 100vh;
+  position: relative;/*←相対位置*/
+  padding-bottom: 120px;/*←footerの高さ*/
+  box-sizing: border-box;/*←全て含めてmin-height:100vhに*/
+}
+.ex-height-20{
+  height: 50px;
+}
+
+.ex-right-10{
+  right: 10px;
+}
