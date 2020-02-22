@@ -234,4 +234,28 @@ End_of_sql;
 
         return $result;
     }
+
+    public function getAllRoomId($search=''){
+$sql = <<< End_of_sql
+SELECT
+    room.room_id
+FROM
+    room
+WHERE
+    room.delete_flag = :delete_flag
+End_of_sql;
+
+        if (!empty($search)) {                                    //もし$searchが空じゃなければ
+            $sql .= " AND room.title LIKE '%{$search}%'";         //$sqlに条件を追加
+        }       
+
+        $bind_params=[
+            'delete_flag'=>0,
+
+        ];
+
+        $result=stdClassToArray(\DB::select($sql,$bind_params));
+
+        return $result;
+    }
 }

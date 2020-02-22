@@ -8,6 +8,7 @@ namespace  App\Http\Controllers\Top;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Top\IndexRequest;
 use App\Services\Top\IndexService;
+use App\Models\_common\RoomData;
 
 //このファイルのクラス名と役割
 class IndexController extends Controller
@@ -22,4 +23,7 @@ class IndexController extends Controller
         //取得したデータを使ってビューを表示
         return view('top.index')->with($data);
     }
+
+
+
 }

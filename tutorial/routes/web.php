@@ -26,6 +26,11 @@ Route::get('/room', 'Room\IndexController@index');
 Route::get('/user', 'User\IndexController@index');
 Route::get('/category', 'Category\IndexController@index');
 Route::get('/category/detail', 'Category\IndexController@detail');
+Route::get('/example','ExampleController@index');
+
+//新規作成 example_blade.phpからの移動
+//@indexは関数
+Route::post('/example_receive','ExampleReceiveController@index');
 
 // ログアウト状態ならアクセス出来る画面
 Route::group(['middleware' => ['user.unauthed']], function () {
