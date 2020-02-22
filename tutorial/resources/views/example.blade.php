@@ -14,8 +14,9 @@
     {{--本文--}}
     
 
-    <body class="container" style ="background-color : #000" ; color= "FFF"><h1 class="mb-4　rounded border border-dark p-1">Fukami Ryota</h1>
+    <body class="container" style ="background-color : #000; color= FFF"><h1 class="mb-4　rounded border border-dark p-1">Fukami Ryota</h1>
     <img class="mb-4 rounded border border-dark p-1" src="/storage/example.jpg" width="900px" height="400px">
+
 
 
 
