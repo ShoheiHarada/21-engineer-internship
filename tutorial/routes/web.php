@@ -26,6 +26,8 @@ Route::get('/room', 'Room\IndexController@index');
 Route::get('/user', 'User\IndexController@index');
 Route::get('/category', 'Category\IndexController@index');
 Route::get('/category/detail', 'Category\IndexController@detail');
+Route::get('/example', 'ExampleController@index');
+Route::get('/example2', 'ExampleController2@index');
 
 // ログアウト状態ならアクセス出来る画面
 Route::group(['middleware' => ['user.unauthed']], function () {
@@ -56,6 +58,18 @@ Route::group(['middleware' => ['user.authed']], function () {
     Route::post('/room/edit', 'Room\IndexController@actionEdit');
     //ルーム削除
     Route::post('/room/delete', 'Room\IndexController@actionDelete');
+    //ルームお気に入り
+    Route::post('/room/favorite', 'Room\IndexController@actionFavorite');
+    //ルームnewお気に入り
+    Route::post('/room/newfavorite', 'Room\IndexController@actionNewFavorite');
+    //ルームnewお気に入り非同期
+    Route::post('/room/newfavoritehidouki', 'Room\IndexController@actionNewFavoriteHidouki');
+    //ルームお気に入り解除
+    Route::post('/room/unfavorite', 'Room\IndexController@actionUnFavorite');
+    //お気に入りの部屋
+    Route::get('/room/favoriterooms', 'Room\IndexController@actionMyFavoriteRoom');
+    //お気に入りの部屋
+    Route::get('/room/joinedrooms', 'Top\IndexController@actionJoinedRoom');
     //コメント投稿
     Route::post('/room/comment', 'Room\CommentController@actionPost');
     //コメント編集
