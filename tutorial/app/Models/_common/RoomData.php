@@ -7,6 +7,7 @@ namespace  App\Models\_common;
 class RoomData
 {
     const TABLE = 'room';
+    const TABLE2 = 'favorite_room';
 
     //ルームIDのリストを取得
     public function getRoomIdList($param)
@@ -14,7 +15,7 @@ class RoomData
         $where = [];
         $or_where = [];
         //ワード検索がかかっていた場合に設定
-        if (isset($param['search'])) {
+        if (isset($param['search'])) {//preDump($param['search'],1);
             //全角空白を半角空白に変換
             $search = preg_replace("|　|"," ",$param['search']);
             //検索ワードを半角カナ→全角カナ、全角英数字→半角英数字に変換
@@ -22,8 +23,9 @@ class RoomData
             //半角空白で区切ってそれぞれを配列に
             $search_words = explode(" ",$search_word);
             //すべての検索ワードに関して条件節を作成
+            
             foreach ($search_words as $word) {
-                $word = likeEscape($word);
+                $word = likeEscape($word);//preDump($word,1);
                 //ルーム名に対する条件
                 $where[] = ['title', 'LIKE', "%{$word}%"];
                 //ルーム詳細に対する条件
@@ -61,8 +63,18 @@ class RoomData
 
         return stdClassToArray($result);
     }
+    //favoriteから
+    public function getRoomIdListByFavorite($data)
+    {
+        $result = \DB::table(self::TABLE2)
+            ->select('room_id')
+            ->where('favorite_flag',1)
+            ->where('user_id',$data['user_id'])
+            ->paginate(10);
 
-    //ルームIDからルームの詳細を取得
+        return stdClassToArray($result);
+    }
+        //ルームIDからルームの詳細を取得
     public function getRoomData($room_id)
     {
         //実行したいSQL文を作成
@@ -234,4 +246,32 @@ End_of_sql;
 
         return $result;
     }
+
+    public function getAllRoomId($search = '')
+    {
+        //実行したいSQL文を作成
+        $sql = <<< End_of_sql
+SELECT
+    room.room_id
+FROM
+    room
+INNER JOIN
+    category on room.category_id = category.category_id
+WHERE
+    room.delete_flag = :delete_flag
+End_of_sql;
+
+if (!empty($search)) {                                    //もし$searchが空じゃなければ
+    $sql .= " AND (room.title LIKE '%{$search}%'OR category.category_name LIKE '%{$search}%')";         //$sqlに条件を追加
+}
+ //SQL内で使う変数を定義
+ $bind_params = [
+    'delete_flag' => 0,
+];
+$result = stdClassToArray(\DB::select($sql, $bind_params));
+
+        return $result;
+
+    }
+    
 }

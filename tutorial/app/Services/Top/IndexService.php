@@ -41,7 +41,15 @@ class IndexService
         foreach ($result['data'] as $room) {
             $result['room_list'][] = $this->_room->getRoomData($room['room_id']);
         }
+//preDump($result['room_list'][1]['created_date'],1);
 
+// foreach($result['room_list'] as $room){//preDump($room['created_date'],1);
+//     $date = new \DateTime($room['created_date']);
+//    // preDump(date('Y年m月d日　H時i分s秒', strtotime($room['created_date'])),1);
+//     $room['created_date_jp']=date('Y年m月d日　H時i分s秒', strtotime($room['created_date']));
+//    // preDump($room['created_date_jp'],1);
+//             }
+// preDump($result,1);
         return $result;
     }
 }

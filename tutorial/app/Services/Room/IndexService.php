@@ -6,6 +6,7 @@ namespace  App\Services\Room;
 //使うファイルのディレクトリ
 use App\Models\_common\CategoryData;
 use App\Models\_common\RoomData;
+use App\Models\_common\FavoriteRoomData;
 use App\Models\_common\CommentData;
 use App\Models\_common\UserData;
 
@@ -14,6 +15,7 @@ class IndexService
 {
     protected $_category;
     protected $_room;
+    protected $_favorite_room;
     protected $_user;
     protected $_comment;
 
@@ -21,12 +23,14 @@ class IndexService
     public function __construct(
         CategoryData $category,
         RoomData $room,
+        FavoriteRoomData $favorite_room,
         UserData $user,
         CommentData $comment
     )
     {
         $this->_category = $category;
         $this->_room = $room;
+        $this->_favorite_room = $favorite_room;
         $this->_user = $user;
         $this->_comment = $comment;
     }
@@ -156,5 +160,41 @@ class IndexService
         $this->_category->updateCategoryRoomCount();
 
         return $result;
+    }
+
+    //お気に入り
+    public function favoriteRoom($param)
+    {
+        //ユーザーIDを取得
+        $param['user_id'] = \Auth::guard('user')->Id();
+        //preDump($param,1);
+        //ルームをお気に入りに追加
+        $this->_favorite_room->favoriteRoom($param);
+        //ルームカウントを更新
+        //$this->_category->updateCategoryRoomCount();
+       // 
+       // return $result;
+    }
+    public function newfavoriteRoom($param)
+    {
+        //ユーザーIDを取得
+        $param['user_id'] = \Auth::guard('user')->Id();
+		$param['room_id']=(int)$_POST['room_id'];
+        //preDump($param,1);
+        //ルームをお気に入りに追加
+        $this->_favorite_room->newfavoriteRoom($param);
+        
+    }
+    public function unfavoriteRoom($param)
+    {
+        //ユーザーIDを取得
+        $param['user_id'] = \Auth::guard('user')->Id();
+        //preDump($param,1);
+        //ルームをお気に入りに追加
+        $this->_favorite_room->unfavoriteRoom($param);
+        //ルームカウントを更新
+        //$this->_category->updateCategoryRoomCount();
+       // 
+       // return $result;
     }
 }

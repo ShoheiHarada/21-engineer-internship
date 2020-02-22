@@ -196,4 +196,37 @@ End_of_sql;
 
         return $result;
     }
+    public function deleteCommentAuth($param)
+    {
+        //現在時刻
+        $now = nowDateTime();
+
+        //実行したいSQL文を作成
+        $sql = <<< End_of_sql
+UPDATE
+    comment
+SET
+    delete_flag   = :delete_flag ,
+    updated_date  = :updated_date
+WHERE
+    comment_id = :comment_id
+AND 
+    user_id = :user_id
+AND 
+    room_id = :room_id
+End_of_sql;
+
+        //SQL内で使う変数を定義
+        $bind_params = [
+            'delete_flag' => 1,
+            'updated_date' => $now,
+            'comment_id' => $param['comment_id'],
+            'user_id' => $param['user_id']['user_id'],
+            'room_id' => $param['room_id']
+        ];
+
+        $result = \DB::update($sql, $bind_params);
+
+        return $result;
+    }
 }

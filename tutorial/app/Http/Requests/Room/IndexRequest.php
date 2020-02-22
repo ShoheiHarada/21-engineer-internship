@@ -18,7 +18,7 @@ class IndexRequest extends FormRequest
         }
 
         $this->_inputs = parent::all();
-
+        
         return $this->_inputs;
     }
 
@@ -43,7 +43,7 @@ class IndexRequest extends FormRequest
             'room_id'=> 'ルームID',
         ];
     }
-
+//
     //バリデーションエラーの時のメッセージを設定
     public function messages()
     {

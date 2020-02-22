@@ -30,9 +30,9 @@ class IndexController extends Controller
     //プロフィール画像変更
     public function image(IndexRequest $request)
     {
-        $param = $request->all();
+        $param = $request->all();//preDump($param,1);
         $user_id = \Auth::guard('user')->Id();
-        if(isset($param['user_image'])) {
+        if(isset($param['user_image'])) {//preDump($request->file('user_image'),1);
             $request->file('user_image')->storeAs('public/user_image',"user_$user_id.jpg");
             return redirect("/mypage");
         }

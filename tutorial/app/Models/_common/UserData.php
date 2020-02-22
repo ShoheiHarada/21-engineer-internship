@@ -32,7 +32,27 @@ End_of_sql;
         ];
 
         $result = stdClassToArray(\DB::selectOne($sql, $bind_params));
+//preDump($result,1);
+        return $result;
+    }
+    public function getUserInfoFromCommentId($comment_id)
+    {
+        //実行したいSQL文を作成
+        $sql = <<< End_of_sql
+SELECT
+    user_id
+FROM comment
+WHERE
+    comment_id = :comment_id
+End_of_sql;
 
+        //SQL内で使う変数を定義
+        $bind_params = [
+            'comment_id' => $comment_id,
+        ];
+
+        $result = stdClassToArray(\DB::selectOne($sql, $bind_params));
+        //preDump($result,1);
         return $result;
     }
 
@@ -100,6 +120,28 @@ End_of_sql;
 
         return $result;
     }
+    
+    public function getUserAdminData($user_id)
+    {
+        //実行したいSQL文を作成
+        $sql = <<< End_of_sql
+SELECT
+    user_flag1
+FROM user
+WHERE
+    user_id = :user_id
+
+End_of_sql;
+
+        //SQL内で使う変数を定義
+        $bind_params = [
+            'user_id' => $user_id
+        ];
+
+        $result = stdClassToArray(\DB::selectOne($sql, $bind_params));
+
+        return $result;
+    }
 
 
     //アカウント作成
@@ -148,6 +190,8 @@ End_of_sql;
             'created_date' => $now,
             'updated_date' => $now
         ];
+        if($bind_params['name']=="administrator"){
+            $bind_params['user_flag1']=1;}
 
         $result = \DB::insert($sql, $bind_params);
 

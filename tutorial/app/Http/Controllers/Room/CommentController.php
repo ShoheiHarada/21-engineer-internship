@@ -35,6 +35,7 @@ class CommentController extends Controller
     public function actionDelete(CommentRequest $request, CommentService $service)
     {
         $param = $request->all();
+        //preDump($param,1);
         $service->deleteComment($param);
 
         return redirect("/room?room_id={$param['room_id']}")->with('success', 'コメントを削除しました');

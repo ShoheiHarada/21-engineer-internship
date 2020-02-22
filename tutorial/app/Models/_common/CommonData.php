@@ -117,4 +117,100 @@ End_of_sql;
 
         return $result;
     }
+    public function getRoomUserRanking()
+    {
+        //現在時刻
+        $now = nowDateTime();
+        //実行したいSQL文を作成
+        $sql = <<< End_of_sql
+SELECT
+    title,
+    room.room_id,
+    count(distinct comment.user_id) as user_count
+FROM
+    room
+LEFT JOIN comment
+    ON room.room_id = comment.room_id
+WHERE
+    room.delete_flag = 0
+AND
+    comment.delete_flag = 0
+AND
+    room.created_date > (:now - INTERVAL 1 MONTH)
+GROUP BY room.room_id
+ORDER BY user_count DESC,
+        room.created_date ASC
+LIMIT 10
+End_of_sql;
+
+        //SQL内で使う変数を定義
+        $bind_params = [
+            'now' => $now,
+        ];
+
+        $result = stdClassToArray(\DB::select($sql, $bind_params));
+//preDump($result,1);
+        return $result;
+    }
+    
+    public function getJoinedRoomId($user_id)
+    {
+        //現在時刻
+       // $now = nowDateTime();
+        //実行したいSQL文を作成
+        $sql = <<< End_of_sql
+SELECT DISTINCT
+    comment.room_id
+FROM
+    comment
+WHERE
+    comment.user_id= :user_id
+AND
+    comment.delete_flag = 0
+End_of_sql;
+
+        //SQL内で使う変数を定義
+        $bind_params = [
+            'user_id' => $user_id
+        ];
+$coResult=NULL;
+$cnt=0;
+        $result = stdClassToArray(\DB::select($sql, $bind_params));
+        foreach($result as $re){
+            $coResult[$cnt]=$re['room_id'];
+            $cnt++;
+        }
+        //preDump($coResult,1);
+        return $result;
+    }
+    public function getJoinedRoomIdMergedArray($user_id)
+    {
+        //現在時刻
+       // $now = nowDateTime();
+        //実行したいSQL文を作成
+        $sql = <<< End_of_sql
+SELECT DISTINCT
+    comment.room_id
+FROM
+    comment
+WHERE
+    comment.user_id= :user_id
+AND
+    comment.delete_flag = 0
+End_of_sql;
+
+        //SQL内で使う変数を定義
+        $bind_params = [
+            'user_id' => $user_id
+        ];
+$coResult=NULL;
+$cnt=0;
+        $result = stdClassToArray(\DB::select($sql, $bind_params));
+        foreach($result as $re){
+            $coResult[$cnt]=$re['room_id'];
+            $cnt++;
+        }
+        //preDump($coResult,1);
+        return $coResult;
+    }
 }

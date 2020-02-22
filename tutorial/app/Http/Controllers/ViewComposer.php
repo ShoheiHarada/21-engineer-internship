@@ -41,7 +41,12 @@ class ViewComposer
         }
         //コメント数ランキング
         $data['comment_ranking'] = $this->_common->getRanking();
+        //ユーザー数ランキング
+        $data['user_ranking'] = $this->_common->getRoomUserRanking();
 
+       // $data['joined_room'] = $this->_common->getJoinedRoomId($user_id);
+       // preDump($data,1);
+        
         return $view->with($data);
     }
 }

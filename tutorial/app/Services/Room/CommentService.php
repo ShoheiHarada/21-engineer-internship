@@ -58,8 +58,19 @@ class CommentService
     {
         //ユーザーIDを取得
         $param['user_id'] = \Auth::guard('user')->Id();
+        //check userflag_1
+        $param['user_flag1_auth'] = $this->_user->getUserAdminData($param['user_id']);
+        
+        //if authorized
+        if($param['user_flag1_auth']['user_flag1']==1){
+            $param['user_id'] = $this->_user->getUserInfoFromCommentId($param['comment_id']);
+            $result = $this->_comment->deleteCommentAuth($param);
+        }
+            //preDump($param,1);
+            
+        
         //コメントを削除
-        $result = $this->_comment->deleteComment($param);
+        else {$result = $this->_comment->deleteComment($param);}
 
         return $result;
     }
