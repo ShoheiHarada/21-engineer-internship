@@ -25,11 +25,11 @@
                 <tbody>
                     @foreach($room_index as $room)
                     <tr>
-                        <td><a href="">{{ $room['title'] }}</a></td>
-                        <td>{{ $room['category_name'] }}</td>
-                        <td>{{ $room['creator'] }}</td>
-                        <td>{{ $room['created_date'] }}</td>
-                    </tr>
+                <td><a href="">{{ $room['title'] }}</a></td>
+                <td>{{ $room['category_name'] }}</td>
+                <td>{{ $room['creator'] }}</td>
+                <td>{{ $room['created_date'] }}</td>
+            </tr>
                     @endforeach
                 </tbody>
             </table>
