@@ -26,6 +26,8 @@ Route::get('/room', 'Room\IndexController@index');
 Route::get('/user', 'User\IndexController@index');
 Route::get('/category', 'Category\IndexController@index');
 Route::get('/category/detail', 'Category\IndexController@detail');
+Route::get('/example', 'ExampleController@index');
+
 
 // ログアウト状態ならアクセス出来る画面
 Route::group(['middleware' => ['user.unauthed']], function () {
