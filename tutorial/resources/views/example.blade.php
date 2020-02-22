@@ -13,6 +13,9 @@
     <body>
      <h1>Exampleページ</h1>
      <div>
+     @php
+            preDump($room_index);
+        @endphp
             <table>
                 <thead>
                     <tr>

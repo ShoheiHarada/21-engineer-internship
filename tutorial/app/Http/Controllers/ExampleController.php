@@ -19,9 +19,9 @@ class ExampleController extends Controller
     {
         //dataの配列、key:room_indexの値にgetRoomIndexから得た値を入れていく。
         $data['room_index'] = $service->getRoomIndex();
-        print "<pre>";
-        print_r($data);
-        print "</pre>";
+        // print "<pre>";
+        // print_r($data);
+        // print "</pre>";
         //どこに返すのか・・・→呼び出し元はrouter。直で@indexが呼ばれている。
         //呪文「dataの中身をbladeに渡してviewをrouterに返す」
         exit;
