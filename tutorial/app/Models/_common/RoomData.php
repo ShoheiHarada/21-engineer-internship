@@ -234,4 +234,32 @@ End_of_sql;
 
         return $result;
     }
+
+    //練習用のメソッドを追加する（getAllRoomId）
+    public function getAllRoomId()
+    {
+        $sql =<<<End_of_sql
+
+-- 条件に合う、テーブル.カラムを出力する
+SELECT 
+    room.room_id
+-- 条件を指定する
+FROM -- テーブル結合して出力する(複数選択必要)
+    room
+WHERE 
+    room.delete_flag = :delete_flag
+End_of_sql;
+
+        //SQL内で使う変数を配列で定義する（バインドパラメータと呼ぶ）
+        //バインドパラメータはSQL内のコロンから始まる文字列を置き換えるための変数
+        $bind_params = [
+            'delete_flag' => 0
+        ];
+
+        //\DB::select($sql, $bind_params)はSELECTを実行するときの関数
+        //stdClassToArray()は、stdClassObjectを配列に変換する関数
+        $result = stdClassToArray(\DB::select($sql, $bind_params));
+        return $result;//関数 getAllRoomId（RoomDataモデル内のメソッド） を呼び出した時に値を返す
+    }
+    
 }
