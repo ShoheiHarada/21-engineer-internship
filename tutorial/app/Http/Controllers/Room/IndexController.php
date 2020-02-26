@@ -146,12 +146,26 @@ if(isset($param['room_image'])) {
 	//新しいお気に入りの部屋非同期
 	public function actionNewFavoriteHidouki( favIndexService $service)
 	{
-		//preDump($param,1);
+		preDump("ok",1);
+		if(isset($_POST['room_id'])){
 			$param['room_id']=(int)$_POST['room_id'];
-			//preDump($param,1);
+			
 			$service->newfavoriteRoomHidouki($param);
+
+			$str = "AJAX REQUEST SUCCESS\nroom_id:".$param['room_id']."\n";
+			$result = nl2br($str);
+			echo $result;
+	}else{
+			echo 'FAIL TO AJAX REQUEST';
+	}
+
 		
-			//return redirect("/room?room_id={$param['room_id']}&newfavorite=1");
+// //		preDump($param,1);
+// 			$param['room_id']=(int)$_POST['room_id'];
+// 		//	preDump($param,1);
+// 			$service->newfavoriteRoomHidouki($param);
+		
+// 			//return redirect("/room?room_id={$param['room_id']}&newfavorite=1");
 
 	}
 }

@@ -7,7 +7,8 @@ $Authed = \Auth::guard()->check();
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </head>
 
 @section('contents')
@@ -29,64 +30,46 @@ $Authed = \Auth::guard()->check();
             <input type="submit" value="お気に入り">
           </form>
           <!-- 非同期テスト -->
-          <form id="newfav" method="post" action="/room/newfavoritehidouki">
+          <form id="newfav">
             {{ csrf_field() }}
             <input type="hidden" name="new_fav_room_id" id="fav_room_id" value="{{ $room_data['room_id'] }}">
-            <input type="submit" value="お気に入り">
+            <!-- <input type="button" id="submitFB" name="submit" value="送信" onclick="asyncSend()"> -->
           </form>
-          <p>
-            <button type="button" id="submitFB">非同期お気に入り　　</button>
-          </p>
+          <button id="ajax">ajax</button>
           <div id="mixdata_response">
             <!-- 結果を出力する -->
           </div>
+          <div class="result"></div>
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+          </script>
           <script>
-          $('#newfav').on('submit', function() {
-                $.post('/room/newfavoritehidouki', {
-                  room_id: room_id2
-                  //document.write(room_id2);
-                }, function(res) {
-                  if (document.getElementById('submitFB').value == str1) {
-                    document.getElementById('submitFB').value = str2;
-                  } else {
-                    document.getElementById('submitFB').value = str1;
+          $(function() {
+            // Ajax button click
+            $('#ajax').on('click', function() {
+
+              $.ajax({
+                  url: '/room/newfavoritehidouki',
+                  type: 'POST',
+                  data: {
+                    'room_id': $('#fav_room_id').val()
                   }
+                })
+                // Ajaxリクエストが成功した時発動
+                .done((data) => {
+                  $('.result').html(data);
+                  console.log(data);
+                })
+                // Ajaxリクエストが失敗した時発動
+                .fail((data) => {
+                  $('.result').html(data);
+                  console.log(data);
+                })
+                // Ajaxリクエストが成功・失敗どちらでも発動
+                .always((data) => {
+
                 });
-
-
-                // window.addEventListener("load", function() {
-                //   document.getElementById("submitFB").addEventListener("click", function() {
-                //     var formDatas = document.getElementById("newfav");
-                //     var mixedDatas = new FormData(formDatas);
-
-
-                //     var XHR = new XMLHttpRequest();
-                //     XHR.open("POST", "/room/newfavoritehidouki", true);
-                //     XHR.send(mixedDatas);
-                //     XHR.onreadystatechange = function() {
-                //       if (XHR.readyState == 4 && XHR.status == 200) {
-                //         // POST送信した結果を表示する
-                //         document.getElementById("mixdata_response").innerHTML = XHR.responseText;
-                //       }
-                //     };
-                //   }, false);
-                // }, false);
-
-
-                //var str1 = "非同期お気に入り　　";
-                //var str2 = "非同期お気に入り解除";
-                //var room_id1 = document.getElementById('fav_room_id').value;
-                //var room_id2 = $('#fav_room_id').val();
-
-                // var newFavForm = document.getElementById("newfav");
-                // newFavForm.action = "/room/newfavoritehidouki";
-                // newFavForm.method = "post";
-                // return false;
-
-                //document.write(room_id2);
-
-
-                /* 2~4の処理 */
+            });
+          });
           </script>
           <!-- 非同期テスト -->
           @elseif($favorite_room['favorite_flag']==0)
