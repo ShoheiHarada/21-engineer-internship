@@ -7,7 +7,7 @@ namespace  App\Http\Controllers;
 
 //使うファイルのディレクトリ
 use App\Http\Controllers\Controller;
-use App\Http\Requests\SignUpRequest;
+use App\Http\Requests\ExampleSignUpRequest;
 use App\Services\SignUpService;
 
 //このファイルのクラス名と役割
@@ -20,7 +20,7 @@ class SignUpController extends Controller
     }
 
 
-    public function action(SignUpRequest $request, SignUpService $service)
+    public function action(ExampleSignUpRequest $request, SignUpService $service)
     {
         //バリデーションとパラメータ取得
         $param = $request->all();
