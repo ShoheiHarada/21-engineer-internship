@@ -28,6 +28,7 @@ Route::get('/category', 'Category\IndexController@index');
 Route::get('/category/detail', 'Category\IndexController@detail');
 Route::get('/example', 'ExampleController@index');
 Route::post('/example_receiver', 'ExampleReceiverController@index');
+Route::get('/false', 'FalseController@index');
 
 
 // ログアウト状態ならアクセス出来る画面
